@@ -1,4 +1,5 @@
 const express = require("express");
+const authMiddleware = require("../middleware/authmiddleware");
 const {
   getAllEmployees,
   createEmployee,
@@ -8,9 +9,9 @@ const {
 
 const router = express.Router();
 
-router.get("/", getAllEmployees);
-router.post("/", createEmployee);
-router.put("/:id", updateEmployee);
-router.delete("/:id", deleteEmployee);
+router.get("/", authMiddleware, getAllEmployees);
+router.post("/", authMiddleware, createEmployee);
+router.put("/:id", authMiddleware, updateEmployee);
+router.delete("/:id", authMiddleware, deleteEmployee);
 
 module.exports = router;
